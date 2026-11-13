@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root { --black:#000; --white:#f0f0fa; --dim:#545457; --line:rgba(240,240,250,0.15); }
+:root { --black:#000; --white:#f0f0fa; --dim:#545457; --line:rgba(240,240,250,0.15); --accent:rgba(240,240,250,0.08); }
 * { box-sizing:border-box; margin:0; padding:0; }
 html { scroll-behavior:smooth; }
 body { background:var(--black); color:var(--white); font-family:'Inter',system-ui,sans-serif; font-weight:300; line-height:1.6; letter-spacing:0.02em; }
@@ -18,7 +18,10 @@ body { background:var(--black); color:var(--white); font-family:'Inter',system-u
 .nav-links { display:flex; gap:2.5rem; }
 .nav-links a { color:var(--white); text-decoration:none; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; transition:opacity 0.2s; }
 .nav-links a:hover { opacity:0.6; }
-.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:8rem 8vw 4rem; position:relative; }
+.hero { min-height:100vh; display:flex; align-items:center; padding:7rem 8vw 4rem; position:relative; gap:4rem; }
+.hero-content { flex:1; }
+.hero-img { flex:0 0 280px; }
+.hero-img img { width:100%; border-radius:2px; filter:contrast(1.05); border:1px solid var(--line); }
 .eyebrow { font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--dim); margin-bottom:1.5rem; }
 h1 { font-family:'Oswald',sans-serif; font-weight:500; font-size:clamp(2.2rem,5vw,4rem); line-height:1.05; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:1.5rem; }
 .tagline { font-size:clamp(1.05rem,2vw,1.3rem); max-width:680px; margin-bottom:2.5rem; }
@@ -27,12 +30,17 @@ h1 { font-family:'Oswald',sans-serif; font-weight:500; font-size:clamp(2.2rem,5v
 section { padding:6rem 8vw; border-top:1px solid var(--line); }
 h2 { font-family:'Oswald',sans-serif; font-weight:500; font-size:clamp(1.8rem,3.5vw,2.8rem); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:2rem; }
 .about-grid, .skills-grid, .exp-grid { display:grid; grid-template-columns:1fr 2fr; gap:3rem; align-items:start; }
-@media (max-width:900px) { .about-grid,.skills-grid,.exp-grid { grid-template-columns:1fr; } .nav-links { display:none; } }
-.portrait { width:100%; max-width:280px; border-radius:2px; filter:contrast(1.05); }
+@media (max-width:900px) { 
+  .about-grid,.skills-grid,.exp-grid { grid-template-columns:1fr; } 
+  .nav-links { display:none; }
+  .hero { flex-direction:column; text-align:center; gap:2rem; padding-top:8rem; }
+  .hero-img { flex:0 0 auto; max-width:220px; }
+}
 .skills-list { display:flex; flex-wrap:wrap; gap:0.5rem; }
-.skill { border:1px solid var(--line); padding:0.35rem 0.8rem; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; }
+.skill { border:1px solid var(--line); padding:0.35rem 0.8rem; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; background:var(--accent); }
 .timeline { display:flex; flex-direction:column; gap:2rem; }
-.job { border-left:1px solid var(--line); padding-left:1.4rem; }
+.job { border-left:1px solid var(--line); padding-left:1.4rem; position:relative; }
+.job::before { content:''; position:absolute; left:-5px; top:0.4rem; width:9px; height:9px; background:var(--white); border-radius:50%; }
 .job h3 { font-family:'Oswald',sans-serif; font-weight:500; font-size:1.15rem; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:0.25rem; }
 .job .meta { color:var(--dim); font-size:0.82rem; margin-bottom:0.6rem; }
 .job ul { list-style:none; font-size:0.95rem; }
@@ -60,10 +68,15 @@ footer a:hover { color:var(--white); }
 </nav>
 
 <header class="hero">
-  <div class="eyebrow">Entwicklungsingenieur</div>
-  <h1>Systeme entwickeln.<br>Sicherheitskritisch.<br>Von der Idee bis zur Abnahme.</h1>
-  <p class="tagline">Embedded Software, FPGA, Regelungstechnik und Medizintechnik. Architektur, Requirements, Testing und Automatisierung – in C, Python und VHDL.</p>
-  <a href="#experience" class="btn">Erfahrung ansehen</a>
+  <div class="hero-content">
+    <div class="eyebrow">Entwicklungsingenieur</div>
+    <h1>Systeme entwickeln.<br>Sicherheitskritisch.<br>Von der Idee bis zur Abnahme.</h1>
+    <p class="tagline">Embedded Software, FPGA, Regelungstechnik und Medizintechnik. Architektur, Requirements, Testing und Automatisierung – in C, Python und VHDL.</p>
+    <a href="#experience" class="btn">Erfahrung ansehen</a>
+  </div>
+  <div class="hero-img">
+    <img src="assets/portrait%20(2).jpg" alt="Alexander Bolz">
+  </div>
 </header>
 
 <section id="about">
@@ -71,7 +84,6 @@ footer a:hover { color:var(--white); }
     <div>
       <div class="eyebrow">Profil</div>
       <h2>Über mich</h2>
-      <img class="portrait" src="assets/portrait%20(2).jpg" alt="Alexander Bolz">
     </div>
     <div>
       <p>Erfahrener Entwicklungsingenieur mit Fokus auf sicherheitskritische Systeme in Motion Control und Medizintechnik. Starke Umsetzung in Embedded C, Python und VHDL – ohne Bevorzugung einer Sprache.</p>
@@ -120,7 +132,7 @@ footer a:hover { color:var(--white); }
     </div>
     <div class="timeline">
       <div class="job">
-        <h3>Softwareentwickler</h3>
+        <h3>Entwicklungsingenieur – Software Medizintechnik</h3>
         <div class="meta">LAUDA Medical · ab Oktober 2023</div>
         <ul>
           <li>Medizintechnik: Embedded C, Sensoren und Aktoren</li>
